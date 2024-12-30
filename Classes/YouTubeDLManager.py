@@ -23,7 +23,7 @@ class YouTubeDLManager:
         """
         # Configurar el formato según el modo (Video o Audio)
         if mode == "Video":
-            format_option = 'bestvideo+bestaudio/best'
+            format_option = 'bestvideo'
             extension = 'mp4'
         elif mode == "Audio":
             format_option = 'bestaudio'

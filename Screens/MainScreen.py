@@ -40,6 +40,7 @@ class DownloadThread(QThread):
                 self.download_canceled.emit()  # Notificar cancelación
         except Exception as e:
             print(f"Error en la descarga: {e}")
+            self.download_canceled.emit()  # En caso de error, emitir cancelación
 
 
 
@@ -139,7 +140,8 @@ class MainWindow(QMainWindow):
         if self.download_thread and self.download_thread.isRunning():
             self.download_thread.cancel()
             self.status_label.setText("Estado: Cancelando...")
-
+            self.download_thread.wait()  # Esperar que el hilo termine
+            self.status_label.setText("Estado: Descarga cancelada.")
 
     def start_download(self):
         if not self.url:
